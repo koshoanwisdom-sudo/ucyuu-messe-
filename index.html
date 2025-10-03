@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Happy Birthday - 特別なお祝いフィルム</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+
+        .film-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 2s ease-in-out;
+            z-index: 1;
+            padding-bottom: 80px;
+        }
+
+        .scene.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
+        }
+
+        .scene.fade-out {
+            display: flex;
+            opacity: 0;
+            transform: scale(1.2);
+            z-index: 1;
+        }
+
+        /* Scene 1 - Opening */
+        .opening-text {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+            text-align: center;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 10px rgba(255,255,255,0.3); }
+            to { text-shadow: 2px 2px 20px rgba(255,255,255,0.8); }
+        }
+
+        /* Scene 2 - Flower presentation */
+        .flower-scene {
+            background: 
+                linear-gradient(180deg, #87CEEB 0%, #87CEEB 30%, #B0E0E6 60%, #F0F8FF 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Cloud elements */
+        .flower-scene::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse 200px 80px at 20% 20%, rgba(255,255,255,0.8) 0%, transparent 50%),
+                radial-gradient(ellipse 150px 60px at 60% 15%, rgba(255,255,255,0.7) 0%, transparent 50%),
+                radial-gradient(ellipse 180px 70px at 80% 25%, rgba(255,255,255,0.6) 0%, transparent 50%),
+                radial-gradient(ellipse 120px 50px at 10% 10%, rgba(255,255,255,0.8) 0%, transparent 50%);
+            z-index: 1;
+            animation: cloudDrift 20s ease-in-out infinite;
+        }
+
+        @keyframes cloudDrift {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+        }
+
+        .flower-scene > * {
+            position: relative;
+            z-index: 3;
+        }
+
+        .cosmos-field {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            z-index: 2;
+            background: linear-gradient(to bottom, transparent 0%, rgba(144,238,144,0.3) 100%);
+        }
+
+        .cosmos-flower {
+            position: absolute;
+            animation: cosmosFloat 4s ease-in-out infinite;
+        }
+
+        .cosmos-1 { bottom: 10%; left: 5%; animation-delay: 0s; }
+        .cosmos-2 { bottom: 15%; left: 25%; animation-delay: 0.5s; }
+        .cosmos-3 { bottom: 8%; left: 45%; animation-delay: 1s; }
+        .cosmos-4 { bottom: 20%; left: 65%; animation-delay: 1.5s; }
+        .cosmos-5 { bottom: 12%; left: 85%; animation-delay: 2s; }
+        .cosmos-6 { bottom: 25%; left: 15%; animation-delay: 2.5s; }
+        .cosmos-7 { bottom: 18%; left: 55%; animation-delay: 3s; }
+        .cosmos-8 { bottom: 22%; left: 75%; animation-delay: 3.5s; }
+        .cosmos-9 { bottom: 5%; left: 35%; animation-delay: 4s; }
+        .cosmos-10 { bottom: 30%; left: 95%; animation-delay: 4.5s; }
+
+        .cosmos-petals {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .cosmos-petals::before,
+        .cosmos-petals::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse 15px 25px at 50% 20%, #FFB6C1 0%, #FF69B4 50%, transparent 70%),
+                radial-gradient(ellipse 15px 25px at 20% 50%, #FFB6C1 0%, #FF69B4 50%, transparent 70%),
+                radial-gradient(ellipse 15px 25px at 80% 50%, #FFB6C1 0%, #FF69B4 50%, transparent 70%),
+                radial-gradient(ellipse 15px 25px at 35% 80%, #FFB6C1 0%, #FF69B4 50%, transparent 70%),
+                radial-gradient(ellipse 15px 25px at 65% 80%, #FFB6C1 0%, #FF69B4 50%, transparent 70%),
+                radial-gradient(circle 8px at 50% 50%, #FFD700 0%, #FFA500 100%);
+        }
+
+        .cosmos-petals::after {
+            transform: rotate(36deg);
+        }
+
+        .cosmos-stem {
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, #90EE90, #228B22);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .cosmos-stem::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -6px;
+            width: 14px;
+            height: 8px;
+            background: #90EE90;
+            border-radius: 50% 10px;
+            transform: rotate(30deg);
+        }
+
+        @keyframes cosmosFloat {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg); 
+                opacity: 0.8; 
+            }
+            25% { 
+                transform: translateY(-8px) rotate(2deg); 
+                opacity: 1; 
+            }
+            50% { 
+                transform: translateY(-4px) rotate(-1deg); 
+                opacity: 0.9; 
+            }
+            75% { 
+                transform: translateY(-12px) rotate(3deg); 
+                opacity: 1; 
+            }
+        }
+
+        .carnation-container {
+            display: none;
+        }
+
+        .flower-container {
+            display: block;
+            z-index: 4;
+        }
+
+        .flower-emoji {
+            font-size: 7rem;
+            animation: rotate 4s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(10deg) scale(1.1); }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(80px) scale(0.8); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .flower-message {
+            background: rgba(255,255,255,0.95);
+            padding: 30px 40px;
+            border-radius: 20px;
+            font-size: 1.8rem;
+            color: #333;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            animation: slideUp 2s ease-out 1s both;
+            text-align: center;
+            max-width: 500px;
+            line-height: 1.5;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Scene 3 - Birthday wishes */
+        .wishes-scene {
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+        }
+
+        .birthday-title {
+            font-size: 5rem;
+            color: white;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            animation: bounceIn 2s ease-out;
+        }
+
+        .birthday-message {
+            font-size: 2rem;
+            color: white;
+            text-align: center;
+            max-width: 800px;
+            line-height: 1.6;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+            animation: fadeInDelay 2s ease-out 1s both;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeInDelay {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scene 4 - Memory Lane */
+        .memory-scene {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px 180px 20px;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 500px;
+            animation: gridFadeIn 2s ease-out;
+        }
+
+        .memory-card {
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            animation: cardPop 0.6s ease-out;
+            animation-delay: calc(var(--delay) * 0.2s);
+            animation-fill-mode: both;
+            transform: scale(0);
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            user-select: none;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,1);
+        }
+
+        .memory-card.clicked {
+            animation: cardTransform 0.8s ease-in-out;
+        }
+
+        @keyframes cardTransform {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.2) rotate(10deg); }
+            50% { transform: scale(0.8) rotate(-5deg); }
+            75% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* Cake transformations */
+        .memory-card.cake-transform {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+        }
+
+        /* Balloon pop effect */
+        .memory-card.balloon-transform {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            position: relative;
+        }
+
+        .memory-card.balloon-transform::before {
+            content: '🎊';
+            position: absolute;
+            font-size: 2rem;
+            animation: confettiFall 1s ease-out;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-20px) scale(0); opacity: 0; }
+            50% { transform: translateY(10px) scale(1.5); opacity: 1; }
+            100% { transform: translateY(40px) scale(0.5); opacity: 0; }
+        }
+
+        /* Gift opening effect */
+        .memory-card.gift-transform {
+            background: linear-gradient(45deg, #ffecd2, #fcb69f);
+        }
+
+        /* Star sparkle effect */
+        .memory-card.star-transform {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            animation: starSparkle 2s infinite;
+        }
+
+        @keyframes starSparkle {
+            0%, 100% { box-shadow: 0 0 20px rgba(255,215,0,0.5); }
+            50% { box-shadow: 0 0 40px rgba(255,215,0,0.8), 0 0 60px rgba(255,215,0,0.6); }
+        }
+
+        /* Heart pulse effect */
+        .memory-card.heart-transform {
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+        }
+
+        /* Party explosion effect */
+        .memory-card.party-transform {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            position: relative;
+        }
+
+        .memory-card.party-transform::after {
+            content: '✨🎊✨';
+            position: absolute;
+            font-size: 1.5rem;
+            animation: partyExplosion 1.5s ease-out;
+        }
+
+        @keyframes partyExplosion {
+            0% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+            100% { transform: scale(0.5) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes gridFadeIn {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes cardPop {
+            0% { transform: scale(0) rotate(180deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .memory-title {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            animation: fadeInDelay 1s ease-out;
+        }
+
+        /* Scene 5 - Wishes for the Future */
+        .future-scene {
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .wish-container {
+            text-align: center;
+            animation: wishFloat 2s ease-out;
+        }
+
+        .wish-star {
+            font-size: 6rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .wish-text {
+            font-size: 2.5rem;
+            color: white;
+            margin: 20px 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            animation: typewriter 3s steps(40) forwards;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid white;
+            width: 0;
+        }
+
+        @keyframes wishFloat {
+            0% { transform: translateY(100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+        }
+
+        @keyframes typewriter {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        /* Scene 6 - Grand Finale */
+        .finale-scene {
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4d96ff);
+            background-size: 400% 400%;
+            animation: rainbow 3s ease infinite;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .finale-content {
+            text-align: center;
+            animation: grandEntrance 3s ease-out;
+        }
+
+        .finale-emoji {
+            font-size: 8rem;
+            margin: 20px;
+            display: inline-block;
+            animation: bounce 1s ease-in-out infinite;
+            animation-delay: calc(var(--delay) * 0.3s);
+        }
+
+        .finale-title {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.7);
+            margin: 30px 0;
+            animation: zoomIn 2s ease-out 1s both;
+        }
+
+        @keyframes grandEntrance {
+            0% { transform: scale(0) rotate(360deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Scene 7 - Birthday Cake */
+        .cake-scene {
+            background: linear-gradient(135deg, #f0e4f5 0%, #e1bee7 50%, #ba68c8 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            padding: 50px 50px 100px 50px;
+            position: relative;
+        }
+
+        .cake-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: cakeFloat 3s ease-out;
+        }
+
+        @keyframes cakeFloat {
+            0% { transform: translateY(50px) scale(0.8); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .cake-layer {
+            border-radius: 20px;
+            position: relative;
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            width: 350px;
+            height: 140px;
+            background: linear-gradient(to bottom, #fff8e1 0%, #ffecb3 30%, #ffc0cb 100%);
+            border: 3px solid #ffb74d;
+        }
+
+        .candle {
+            width: 12px;
+            height: 35px;
+            margin: 0 8px;
+            border-radius: 6px 6px 2px 2px;
+            background: linear-gradient(to bottom, #ff6b6b 0%, #4ecdc4 25%, #45b7d1 50%, #96ceb4 75%, #feca57 100%);
+            position: relative;
+            animation: candleFlicker 1.5s infinite alternate;
+        }
+
+        .candle::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 8px;
+            background: radial-gradient(circle, #ff6b35 0%, #f7931e 50%, transparent 70%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flameFlicker 0.5s infinite alternate;
+        }
+
+        @keyframes candleFlicker {
+            0% { transform: translateY(0) scaleY(1); opacity: 1; }
+            50% { transform: translateY(-1px) scaleY(1.05); opacity: 0.9; }
+            100% { transform: translateY(0) scaleY(1); opacity: 1; }
+        }
+
+        @keyframes flameFlicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+            100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
+        }
+
+        .cake-decoration {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-size: 2rem;
+            animation: decorationFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes decorationFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        .cake-message {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            animation: messageRainbow 4s infinite;
+            margin-top: 20px;
+            line-height: 1.4;
+        }
+
+        @keyframes messageRainbow {
+            0% { color: #FF6B6B; }
+            16% { color: #FFD93D; }
+            33% { color: #6BCF7F; }
+            50% { color: #4FACFE; }
+            66% { color: #9B59B6; }
+            83% { color: #FF69B4; }
+            100% { color: #FF6B6B; }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: float linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Floating petals */
+        .petal {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #ff69b4, #ff1493);
+            border-radius: 50% 10px;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Controls - 2段レイアウト */
+        .controls {
+            position: fixed;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 4px;
+            z-index: 1000;
+            max-width: 85%;
+            background: rgba(0,0,0,0.15);
+            padding: 6px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn {
+            padding: 6px 10px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .control-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .control-btn.active {
+            background: rgba(255,255,255,0.8);
+            color: #333;
+        }
+
+        /* Audio Controls */
+        .audio-controls {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.15);
+            padding: 6px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcf7f, #4d96ff);
+            transition: width 2s ease;
+            z-index: 1000;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .opening-text { font-size: 2.5rem !important; }
+            .birthday-title { font-size: 3rem !important; }
+            .birthday-message { font-size: 1.3rem !important; padding: 0 20px !important; }
+            
+            .flower-scene { 
+                flex-direction: column !important; 
+                gap: 30px !important; 
+                padding: 30px 20px 100px 20px !important;
+                background-size: cover !important;
+                background-position: center !important;
+            }
+            .flower-container { 
+                display: none !important;
+            }
+            .flower-message { 
+                font-size: 1.4rem !important; 
+                padding: 25px 30px !important;
+                max-width: 300px !important;
+            }
+            
+            .memory-scene {
+                padding: 40px 15px 200px 15px !important;
+            }
+            .memory-title {
+                font-size: 2.5rem !important;
+                margin-bottom: 30px !important;
+            }
+            .memory-grid { 
+                grid-template-columns: repeat(2, 1fr) !important; 
+                max-width: 350px !important;
+                gap: 15px !important;
+            }
+            .memory-card { 
+                width: 120px !important; 
+                height: 120px !important; 
+                font-size: 2.5rem !important; 
+            }
+            
+            .cake-scene {
+                padding: 30px 20px 120px 20px !important;
+            }
+            
+            .wish-text { font-size: 1.8rem !important; }
+            .finale-title { font-size: 2.5rem !important; }
+            .finale-emoji { font-size: 4rem !important; }
+            .controls { 
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 4px !important;
+                bottom: 5px !important;
+                max-width: 90% !important;
+                padding: 5px !important;
+                border-radius: 10px !important;
+            }
+            .control-btn { 
+                padding: 5px 8px !important; 
+                font-size: 9px !important; 
+                border-radius: 12px !important;
+                line-height: 1.1 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .flower-scene { 
+                flex-direction: column !important; 
+                gap: 40px !important; 
+                padding: 20px 15px 100px 15px !important;
+            }
+            .flower-container { 
+                width: 180px !important; 
+                height: 180px !important; 
+            }
+            .flower-emoji { font-size: 4rem !important; }
+            .flower-message { 
+                font-size: 1.2rem !important; 
+                padding: 20px 25px !important;
+                max-width: 280px !important;
+            }
+            .memory-scene {
+                padding: 30px 15px 140px 15px !important;
+            }
+            .memory-title {
+                font-size: 2rem !important;
+                margin-bottom: 25px !important;
+            }
+            .memory-grid { 
+                grid-template-columns: repeat(2, 1fr) !important;
+                max-width: 300px !important;
+                gap: 12px !important;
+            }
+            .memory-card { 
+                width: 100px !important; 
+                height: 100px !important; 
+                font-size: 2rem !important; 
+            }
+            .cake-scene {
+                padding: 20px 15px 100px 15px !important;
+            }
+            .controls { 
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 3px !important;
+                bottom: 3px !important;
+                max-width: 85% !important;
+                padding: 4px !important;
+                border-radius: 8px !important;
+            }
+            .control-btn { 
+                padding: 4px 6px !important; 
+                font-size: 8px !important; 
+                border-radius: 10px !important;
+                line-height: 1.0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="film-container">
+        <!-- Progress bar -->
+        <div class="progress-bar" id="progressBar"></div>
+
+        <!-- Scene 1: Opening -->
+        <div class="scene active" id="scene1">
+            <div class="opening-text">
+                特別な日に<br>
+                心を込めて
+            </div>
+        </div>
+
+        <!-- Scene 2: Flower presentation -->
+        <div class="scene flower-scene" id="scene2">
+            <div class="cosmos-field">
+                <div class="cosmos-flower cosmos-1">
+                    <div class="cosmos-petals"></div>
+                    <div class="cosmos-stem"></div>
+                </div>
+                <div class="cosmos-flower cosmos-2">
+                    <div class="cosmos-petals"></div>
+                    <div class="cosmos-stem"></div>
+                </div>
+                <div class="cosmos-flower cosmos-3">
+                    <div class="cosmos-petals"></div>
+                    <div class="cosmos-stem"></div>
+                </div>
+                <div class="cosmos-flower cosmos-4">
+                    <div class="cosmos-petals"></div>
+                    <div class="cosmos-stem"></div>
+                </div>
+                <div class="cosmos-flower cosmos-5">
+                    <div class="cosmos-petals"></div>
+                    <div class="cosmos-stem"></div>
+                </div>
+                <div class="cosmos-flower cosmos-6">
+                    <div class="cosmos-petals"></div>
+                    <div class="cosmos-stem"></div>
+                </div>
+                <div class="cosmos-flower cosmos-7">
+                    <div class="cosmos-petals"></div>
+                    <div class="cosmos-stem"></div>
+                </div>
+                <div class="cosmos-flower cosmos-8">
+                    <div class="cosmos-petals"></div>
+                    <div class="cosmos-stem"></div>
+                </div>
+                <div class="cosmos-flower cosmos-9">
+                    <div class="cosmos-petals"></div>
+                    <div class="cosmos-stem"></div>
+                </div>
+                <div class="cosmos-flower cosmos-10">
+                    <div class="cosmos-petals"></div>
+                    <div class="cosmos-stem"></div>
+                </div>
+            </div>
+            <div class="carnation-container">
+                <div class="carnation carnation-1">
+                    <div class="carnation-flower">
+                        <div class="carnation-petals"></div>
+                    </div>
+                    <div class="carnation-stem"></div>
+                </div>
+                <div class="carnation carnation-2">
+                    <div class="carnation-flower">
+                        <div class="carnation-petals"></div>
+                    </div>
+                    <div class="carnation-stem"></div>
+                </div>
+                <div class="carnation carnation-3">
+                    <div class="carnation-flower">
+                        <div class="carnation-petals"></div>
+                    </div>
+                    <div class="carnation-stem"></div>
+                </div>
+                <div class="carnation carnation-4">
+                    <div class="carnation-flower">
+                        <div class="carnation-petals"></div>
+                    </div>
+                    <div class="carnation-stem"></div>
+                </div>
+                <div class="carnation carnation-5">
+                    <div class="carnation-flower">
+                        <div class="carnation-petals"></div>
+                    </div>
+                    <div class="carnation-stem"></div>
+                </div>
+            </div>
+            <div class="flower-container">
+                <div class="flower-emoji">🌹</div>
+            </div>
+            <div class="flower-message">
+                美しい花束とともに<br>
+                特別な思い出を<br>
+                心に刻んで
+            </div>
+        </div>
+
+        <!-- Scene 3: Birthday wishes -->
+        <div class="scene wishes-scene" id="scene3">
+            <div class="birthday-title">Happy Birthday!</div>
+            <div class="birthday-message">
+                今日という特別な日に<br>
+                あなたの笑顔が一番の贈り物<br>
+                素敵な一年になりますように
+            </div>
+        </div>
+
+        <!-- Scene 4: Memory Lane -->
+        <div class="scene memory-scene" id="scene4">
+            <div class="memory-title">思い出のひととき</div>
+            <div class="memory-grid">
+                <div class="memory-card" style="--delay: 1" data-type="cake" onclick="transformCard(this)">🎂</div>
+                <div class="memory-card" style="--delay: 2" data-type="balloon" onclick="transformCard(this)">🎈</div>
+                <div class="memory-card" style="--delay: 3" data-type="gift" onclick="transformCard(this)">🎁</div>
+                <div class="memory-card" style="--delay: 4" data-type="star" onclick="transformCard(this)">🌟</div>
+                <div class="memory-card" style="--delay: 5" data-type="heart" onclick="transformCard(this)">💖</div>
+                <div class="memory-card" style="--delay: 6" data-type="party" onclick="transformCard(this)">🎉</div>
+            </div>
+        </div>
+
+        <!-- Scene 5: Wishes for the Future -->
+        <div class="scene future-scene" id="scene5">
+            <div class="wish-container">
+                <div class="wish-star">⭐</div>
+                <div class="wish-text">夢に向かって歩み続けて</div>
+                <div class="wish-text" style="animation-delay: 3s;">幸せがいっぱいの一年に</div>
+                <div class="wish-text" style="animation-delay: 6s;">すべての願いが叶いますように</div>
+            </div>
+        </div>
+
+        <!-- Scene 6: Grand Finale -->
+        <div class="scene finale-scene" id="scene6">
+            <div class="finale-content">
+                <div class="finale-emoji" style="--delay: 1">🎊</div>
+                <div class="finale-emoji" style="--delay: 2">🎉</div>
+                <div class="finale-emoji" style="--delay: 3">🎁</div>
+                <div class="finale-title">おめでとう！</div>
+                <div class="finale-emoji" style="--delay: 4">💐</div>
+                <div class="finale-emoji" style="--delay: 5">🌹</div>
+                <div class="finale-emoji" style="--delay: 6">✨</div>
+            </div>
+        </div>
+
+        <!-- Scene 7: Birthday Cake -->
+        <div class="scene cake-scene" id="scene7">
+            <div class="cake-container">
+                <div class="cake-layer">
+                    <div class="candle"></div>
+                    <div class="candle"></div>
+                    <div class="candle"></div>
+                    <div class="candle"></div>
+                    <div class="candle"></div>
+                    <div class="cake-decoration">🎂</div>
+                </div>
+            </div>
+            <div class="cake-message">
+                生まれてきてくれてありがとう<br>
+                あなたに出会えた奇跡を嬉しく思います
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button class="control-btn active" onclick="goToScene(1)">はじまり</button>
+        <button class="control-btn" onclick="goToScene(2)">花</button>
+        <button class="control-btn" onclick="goToScene(3)">お祝い</button>
+        <button class="control-btn" onclick="goToScene(4)">思い出</button>
+        <button class="control-btn" onclick="goToScene(5)">願い</button>
+        <button class="control-btn" onclick="goToScene(6)">フィナーレ</button>
+        <button class="control-btn" onclick="goToScene(7)">ケーキ</button>
+        <button class="control-btn" onclick="autoPlay()">自動再生</button>
+    </div>
+    
+    <!-- Audio Controls -->
+    <div class="audio-controls">
+        <button class="control-btn" id="muteBtn" onclick="toggleMute()" title="音声オフ">🔊</button>
+        <button class="control-btn" id="ambientBtn" onclick="toggleAmbient()" title="環境音オン">🌊</button>
+        <button class="control-btn" onclick="testSound()" title="音声テスト">🔉</button>
+    </div>
+
+    <script>
+        let currentScene = 1;
+        let totalScenes = 7;
+        let autoPlayInterval;
+        let isAutoPlaying = false;
+
+        // Web Audio API setup
+        let audioContext;
+        let isMuted = false;
+        let ambientOscillator = null;
+        let ambientGain = null;
+        let audioEnabled = false;
+
+        // 統一された初期化関数
+        function initAudio() {
+            try {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                audioEnabled = true;
+                console.log('Audio context initialized');
+                return Promise.resolve();
+            } catch (e) {
+                console.log('Web Audio API not supported:', e);
+                audioEnabled = false;
+                return Promise.reject(e);
+            }
+        }
+
+        // 音声を有効化する関数
+        function enableAudio() {
+            return new Promise((resolve, reject) => {
+                if (!audioContext) {
+                    initAudio().then(resolve).catch(reject);
+                    return;
+                }
+                
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume()
+                        .then(() => {
+                            audioEnabled = true;
+                            console.log('Audio context resumed');
+                            resolve();
+                        })
+                        .catch(reject);
+                } else {
+                    resolve();
+                }
+            });
+        }
+
+        // 音を再生する関数
+        function playTone(frequency, duration, type = 'sine', volume = 0.1) {
+            if (!audioContext || isMuted || !audioEnabled) {
+                return;
+            }
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+                oscillator.type = type;
+                
+                const now = audioContext.currentTime;
+                gainNode.gain.setValueAtTime(0, now);
+                gainNode.gain.linearRampToValueAtTime(volume, now + 0.05);
+                gainNode.gain.linearRampToValueAtTime(volume, now + duration - 0.05);
+                gainNode.gain.linearRampToValueAtTime(0, now + duration);
+                
+                oscillator.start(now);
+                oscillator.stop(now + duration);
+                
+            } catch (e) {
+                console.error('Error playing tone:', e);
+            }
+        }
+
+        function playChord(frequencies, duration = 0.5) {
+            frequencies.forEach((freq, index) => {
+                setTimeout(() => playTone(freq, duration, 'sine', 0.05), index * 50);
+            });
+        }
+
+        function playSceneTransition(sceneNumber) {
+            const melodies = {
+                1: [261.63, 329.63, 392.00],
+                2: [293.66, 369.99, 440.00],
+                3: [329.63, 415.30, 493.88],
+                4: [349.23, 440.00, 523.25],
+                5: [392.00, 493.88, 587.33],
+                6: [440.00, 554.37, 659.25],
+                7: [523.25, 659.25, 783.99]
+            };
+            playChord(melodies[sceneNumber] || [440, 554, 659]);
+        }
+
+        function playCakeSound() {
+            const cakeChord = [523.25, 659.25, 783.99, 987.77];
+            cakeChord.forEach((freq, index) => {
+                setTimeout(() => playTone(freq, 0.8, 'triangle', 0.06), index * 150);
+            });
+        }
+
+        function playHappyBirthday() {
+            const melody = [
+                {freq: 261.63, duration: 0.3},
+                {freq: 261.63, duration: 0.2},
+                {freq: 293.66, duration: 0.5},
+                {freq: 261.63, duration: 0.5},
+                {freq: 349.23, duration: 0.5},
+                {freq: 329.63, duration: 1.0},
+                {freq: 261.63, duration: 0.3},
+                {freq: 261.63, duration: 0.2},
+                {freq: 293.66, duration: 0.5},
+                {freq: 261.63, duration: 0.5},
+                {freq: 392.00, duration: 0.5},
+                {freq: 349.23, duration: 1.0}
+            ];
+            
+            let delay = 0;
+            melody.forEach(note => {
+                setTimeout(() => {
+                    playTone(note.freq, note.duration, 'triangle', 0.08);
+                }, delay * 1000);
+                delay += note.duration;
+            });
+        }
+
+        function playButtonClick() {
+            playTone(523.25, 0.1, 'square', 0.03);
+        }
+
+        function playSparkle() {
+            const frequencies = [1046.50, 1318.51, 1567.98];
+            frequencies.forEach((freq, index) => {
+                setTimeout(() => playTone(freq, 0.2, 'sine', 0.02), index * 100);
+            });
+        }
+
+        function testSound() {
+            console.log('Testing sound...');
+            enableAudio()
+                .then(() => {
+                    setTimeout(() => {
+                        playTone(440, 0.8, 'sine', 0.15);
+                    }, 100);
+                })
+                .catch(() => {
+                    console.log('Audio test failed');
+                });
+        }
+
+        function createAmbientSound() {
+            if (!audioContext || isMuted || ambientOscillator) return;
+            
+            try {
+                ambientOscillator = audioContext.createOscillator();
+                ambientGain = audioContext.createGain();
+                
+                ambientOscillator.connect(ambientGain);
+                ambientGain.connect(audioContext.destination);
+                
+                ambientOscillator.frequency.setValueAtTime(55, audioContext.currentTime);
+                ambientOscillator.type = 'sine';
+                
+                ambientGain.gain.setValueAtTime(0, audioContext.currentTime);
+                ambientGain.gain.linearRampToValueAtTime(0.005, audioContext.currentTime + 2);
+                
+                ambientOscillator.start();
+                
+                const modulation = audioContext.createOscillator();
+                const modulationGain = audioContext.createGain();
+                
+                modulation.connect(modulationGain);
+                modulationGain.connect(ambientOscillator.frequency);
+                
+                modulation.frequency.setValueAtTime(0.1, audioContext.currentTime);
+                modulationGain.gain.setValueAtTime(2, audioContext.currentTime);
+                
+                modulation.start();
+            } catch (e) {
+                console.error('Error creating ambient sound:', e);
+            }
+        }
+
+        function stopAmbientSound() {
+            if (ambientOscillator && ambientGain) {
+                try {
+                    ambientGain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 1);
+                    setTimeout(() => {
+                        if (ambientOscillator) {
+                            ambientOscillator.stop();
+                            ambientOscillator = null;
+                            ambientGain = null;
+                        }
+                    }, 1000);
+                } catch (e) {
+                    console.error('Error stopping ambient sound:', e);
+                }
+            }
+        }
+
+        function toggleAmbient() {
+            if (ambientOscillator) {
+                stopAmbientSound();
+                document.getElementById('ambientBtn').textContent = '🌊';
+                document.getElementById('ambientBtn').title = '環境音オン';
+            } else {
+                enableAudio().then(() => {
+                    createAmbientSound();
+                    document.getElementById('ambientBtn').textContent = '🔇';
+                    document.getElementById('ambientBtn').title = '環境音オフ';
+                }).catch(() => {
+                    console.log('Failed to enable ambient sound');
+                });
+            }
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            const muteBtn = document.getElementById('muteBtn');
+            if (muteBtn) {
+                muteBtn.textContent = isMuted ? '🔇' : '🔊';
+                muteBtn.title = isMuted ? '音声オン' : '音声オフ';
+            }
+            
+            if (isMuted && ambientOscillator) {
+                stopAmbientSound();
+            }
+        }
+
+        // Create floating particles
+        function createParticles() {
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                document.body.appendChild(particle);
+            }
+        }
+
+        // Create falling petals
+        function createPetals() {
+            for (let i = 0; i < 15; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.animationDelay = Math.random() * 5 + 's';
+                petal.style.animationDuration = (Math.random() * 8 + 4) + 's';
+                document.body.appendChild(petal);
+            }
+        }
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                const progress = (currentScene / totalScenes) * 100;
+                progressBar.style.width = progress + '%';
+            }
+        }
+
+        function goToScene(sceneNumber) {
+            if (sceneNumber === currentScene) return;
+
+            // 音声を有効化
+            enableAudio()
+                .then(() => {
+                    setTimeout(() => {
+                        playSceneTransition(sceneNumber);
+                    }, 50);
+                })
+                .catch(() => {
+                    console.log('Audio failed, continuing without sound');
+                });
+
+            // すべてのシーンを非表示
+            for (let i = 1; i <= totalScenes; i++) {
+                const scene = document.getElementById(`scene${i}`);
+                if (scene) {
+                    scene.classList.remove('active', 'fade-out');
+                    scene.style.display = 'none';
+                }
+            }
+
+            // すべてのボタンからactiveクラスを削除
+            document.querySelectorAll('.control-btn').forEach(btn => btn.classList.remove('active'));
+
+            // 新しいシーンを表示
+            setTimeout(() => {
+                const newScene = document.getElementById(`scene${sceneNumber}`);
+                if (newScene) {
+                    newScene.style.display = 'flex';
+                    newScene.classList.add('active');
+                    
+                    // アクティブボタンを更新
+                    const buttons = document.querySelectorAll('.control-btn');
+                    if (buttons[sceneNumber - 1]) {
+                        buttons[sceneNumber - 1].classList.add('active');
+                    }
+
+                    // 特別なシーンの音効果
+                    try {
+                        if (sceneNumber === 6) {
+                            setTimeout(() => playSparkle(), 500);
+                            setTimeout(() => playSparkle(), 1000);
+                            setTimeout(() => playSparkle(), 1500);
+                        } else if (sceneNumber === 7) {
+                            setTimeout(() => playCakeSound(), 500);
+                        }
+                    } catch (e) {
+                        console.log('Sound effect error:', e);
+                    }
+                }
+            }, 100);
+
+            currentScene = sceneNumber;
+            updateProgressBar();
+        }
+
+        function autoPlay() {
+            if (isAutoPlaying) {
+                clearInterval(autoPlayInterval);
+                isAutoPlaying = false;
+                const autoBtn = document.querySelector('[onclick="autoPlay()"]');
+                if (autoBtn) autoBtn.textContent = '自動再生';
+            } else {
+                isAutoPlaying = true;
+                const autoBtn = document.querySelector('[onclick="autoPlay()"]');
+                if (autoBtn) autoBtn.textContent = '停止';
+                
+                enableAudio().then(() => {
+                    playHappyBirthday();
+                }).catch(() => {
+                    console.log('Auto play started without sound');
+                });
+                
+                autoPlayInterval = setInterval(() => {
+                    let nextScene = currentScene + 1;
+                    if (nextScene > totalScenes) {
+                        nextScene = 1;
+                        enableAudio().then(() => {
+                            playHappyBirthday();
+                        }).catch(() => {
+                            console.log('Loop melody failed');
+                        });
+                    }
+                    goToScene(nextScene);
+                }, 5000);
+            }
+        }
+
+        // 初期化関数
+        function initialize() {
+            try {
+                // エフェクト作成
+                createParticles();
+                createPetals();
+                updateProgressBar();
+
+                // すべてのシーンを非表示にして、scene1のみ表示
+                for (let i = 1; i <= totalScenes; i++) {
+                    const scene = document.getElementById(`scene${i}`);
+                    if (scene) {
+                        scene.style.display = 'none';
+                        scene.classList.remove('active');
+                    }
+                }
+                
+                // scene1のみ表示
+                const scene1 = document.getElementById('scene1');
+                if (scene1) {
+                    scene1.style.display = 'flex';
+                    scene1.classList.add('active');
+                }
+
+                console.log('Initialization completed');
+                
+            } catch (e) {
+                console.error('Initialization error:', e);
+            }
+        }
+
+        // イベントリスナー
+        document.addEventListener('keydown', (e) => {
+            if (isAutoPlaying) return;
+            
+            if (e.key === 'ArrowLeft' && currentScene > 1) {
+                goToScene(currentScene - 1);
+            } else if (e.key === 'ArrowRight' && currentScene < totalScenes) {
+                goToScene(currentScene + 1);
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                autoPlay();
+            } else if (e.key === 'm' || e.key === 'M') {
+                toggleMute();
+            }
+        });
+
+        // タッチ/スワイプサポート
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (isAutoPlaying) return;
+            
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentScene < totalScenes) {
+                    goToScene(currentScene + 1);
+                } else if (diff < 0 && currentScene > 1) {
+                    goToScene(currentScene - 1);
+                }
+            }
+        }
+
+        // ボタンクリック音
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('control-btn')) {
+                enableAudio().then(() => {
+                    playButtonClick();
+                }).catch(() => {
+                    console.log('Button click sound failed');
+                });
+            }
+        });
+
+        // Memory card transformation function
+        function transformCard(card) {
+            const cardType = card.getAttribute('data-type');
+            const currentText = card.textContent;
+            
+            // Prevent multiple rapid clicks
+            if (card.classList.contains('clicked')) return;
+            
+            // Add clicked animation
+            card.classList.add('clicked');
+            
+            // Play transformation sound
+            enableAudio().then(() => {
+                playCardTransformSound(cardType);
+            }).catch(() => {
+                console.log('Card transform sound failed');
+            });
+            
+            // Apply transformation based on card type
+            setTimeout(() => {
+                switch(cardType) {
+                    case 'cake':
+                        card.classList.add('cake-transform');
+                        card.textContent = ['🧁', '🍰', '🎂'][Math.floor(Math.random() * 3)];
+                        break;
+                    case 'balloon':
+                        card.classList.add('balloon-transform');
+                        card.textContent = '💥';
+                        setTimeout(() => {
+                            card.textContent = '🎊';
+                        }, 400);
+                        break;
+                    case 'gift':
+                        card.classList.add('gift-transform');
+                        card.textContent = '📦';
+                        setTimeout(() => {
+                            card.textContent = ['🎀', '💝', '🏆'][Math.floor(Math.random() * 3)];
+                        }, 400);
+                        break;
+                    case 'star':
+                        card.classList.add('star-transform');
+                        card.textContent = '✨';
+                        setTimeout(() => {
+                            card.textContent = '🌟';
+                        }, 1000);
+                        break;
+                    case 'heart':
+                        card.classList.add('heart-transform');
+                        const hearts = ['💖', '💝', '💗', '💓'];
+                        let heartIndex = 0;
+                        const heartInterval = setInterval(() => {
+                            card.textContent = hearts[heartIndex % hearts.length];
+                            heartIndex++;
+                            if (heartIndex >= 8) {
+                                clearInterval(heartInterval);
+                                card.textContent = '💖';
+                            }
+                        }, 200);
+                        break;
+                    case 'party':
+                        card.classList.add('party-transform');
+                        card.textContent = '🎊';
+                        setTimeout(() => {
+                            card.textContent = '🎉';
+                        }, 750);
+                        break;
+                }
+            }, 200);
+            
+            // Reset card after 3 seconds
+            setTimeout(() => {
+                card.classList.remove('clicked', `${cardType}-transform`);
+                card.textContent = currentText;
+            }, 3000);
+        }
+
+        function playCardTransformSound(cardType) {
+            switch(cardType) {
+                case 'cake':
+                    playTone(523.25, 0.3, 'triangle', 0.1); // Sweet cake sound
+                    setTimeout(() => playTone(659.25, 0.3, 'triangle', 0.1), 200);
+                    break;
+                case 'balloon':
+                    playTone(880, 0.1, 'square', 0.15); // Pop sound
+                    setTimeout(() => playTone(440, 0.2, 'sine', 0.1), 200);
+                    break;
+                case 'gift':
+                    playTone(392, 0.2, 'triangle', 0.1); // Opening sound
+                    setTimeout(() => playTone(523.25, 0.3, 'sine', 0.1), 300);
+                    break;
+                case 'star':
+                    // Sparkle sound
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            playTone(1046.50 + (i * 200), 0.2, 'sine', 0.08);
+                        }, i * 150);
+                    }
+                    break;
+                case 'heart':
+                    // Heartbeat sound
+                    playTone(220, 0.2, 'sine', 0.1);
+                    setTimeout(() => playTone(220, 0.2, 'sine', 0.1), 300);
+                    break;
+                case 'party':
+                    // Celebration sound
+                    const partyFreqs = [523.25, 659.25, 783.99, 1046.50];
+                    partyFreqs.forEach((freq, index) => {
+                        setTimeout(() => playTone(freq, 0.2, 'triangle', 0.08), index * 100);
+                    });
+                    break;
+            }
+        }
+
+        // ページ読み込み完了後に初期化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize);
+        } else {
+            initialize();
+        }
+
+        // 4秒後に自動で次のシーンに進む
+        setTimeout(() => {
+            if (!isAutoPlaying) {
+                goToScene(2);
+            }
+        }, 4000);
+    </script>
+</body>
+</html>
